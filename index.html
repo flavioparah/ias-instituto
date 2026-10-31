@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I.A.S. — Instituto de Astrologia Sideral</title>
+<meta name="description" content="Consultas de astrologia sideral (Jyotiṣa): mapa natal, previsão anual e eleição de datas. Atendimento on-line com o Instituto de Astrologia Sideral.">
+<meta name="theme-color" content="#141A28">
+<meta property="og:type" content="website">
+<meta property="og:title" content="I.A.S. — Instituto de Astrologia Sideral">
+<meta property="og:description" content="A medida do céu, lida com rigor e intuição. Consultas e formação em astrologia sideral.">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20400%22%3E%3Crect%20width%3D%22400%22%20height%3D%22400%22%20fill%3D%22%23141A28%22/%3E%3Crect%20x%3D%2230%22%20y%3D%2230%22%20width%3D%22340%22%20height%3D%22340%22%20fill%3D%22none%22%20stroke%3D%22%23C9A45C%22%20stroke-width%3D%2222%22/%3E%3Cline%20x1%3D%2230%22%20y1%3D%2230%22%20x2%3D%22370%22%20y2%3D%22370%22%20stroke%3D%22%23EDE6D6%22%20stroke-width%3D%2218%22/%3E%3Cline%20x1%3D%22370%22%20y1%3D%2230%22%20x2%3D%2230%22%20y2%3D%22370%22%20stroke%3D%22%23EDE6D6%22%20stroke-width%3D%2218%22/%3E%3Cpath%20d%3D%22M200%2030%20L370%20200%20L200%20370%20L30%20200%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23EDE6D6%22%20stroke-width%3D%2218%22/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#141A28;--bg-funda:#0F1420;--sup:#1A2133;
+  --ouro:#C9A45C;--ouro-claro:#E3C88E;
+  --marfim:#EDE6D6;--suave:#C8C1B1;
+  --linha:rgba(201,164,92,.25);--linha-fina:rgba(237,230,214,.15);
+  --serif-tit:'Cinzel','Trajan Pro',Georgia,serif;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--marfim);font-family:var(--serif);font-size:20px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--ouro)}a:hover{color:var(--ouro-claro)}
+:focus-visible{outline:2px solid var(--ouro);outline-offset:3px}
+h1,h2,h3{font-family:var(--serif-tit);font-weight:500;margin:0;line-height:1.2}
+h2{font-size:clamp(28px,3.6vw,46px)}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:24px;padding-right:24px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ouro);color:var(--bg);padding:10px 16px;z-index:100;font-family:var(--sans)}
+.skip:focus{left:8px}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;font-family:var(--sans);font-weight:500;font-size:15px;letter-spacing:.08em;text-decoration:none;border:1px solid var(--ouro);transition:background .2s,color .2s}
+.btn--ouro{background:var(--ouro);color:var(--bg)}
+.btn--ouro:hover{background:var(--ouro-claro);border-color:var(--ouro-claro);color:var(--bg)}
+.btn--linha{background:transparent;color:var(--ouro)}
+.btn--linha:hover{background:rgba(201,164,92,.1);color:var(--ouro-claro)}
+.btn--sm{min-height:44px;padding:0 20px;font-size:14px}
+.btn--bloco{display:flex;width:100%}
+button.btn{cursor:pointer}
+
+/* topo */
+.topo{position:sticky;top:0;z-index:50;background:rgba(15,20,32,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
+.topo__inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.marca{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--marfim)}
+.marca__txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+.marca__sigla{font-family:var(--serif-tit);font-weight:600;font-size:22px;letter-spacing:.14em;color:var(--ouro)}
+.marca__nome{font-family:var(--serif-tit);font-weight:500;font-size:10.5px;letter-spacing:.2em;color:var(--marfim);margin-top:4px;padding-top:4px;border-top:1px solid rgba(201,164,92,.45)}
+.menu{display:flex;align-items:center;gap:28px;font-family:var(--sans);font-size:15px;letter-spacing:.03em}
+.menu a:not(.btn){color:var(--marfim);text-decoration:none;padding:10px 0}
+.menu a:not(.btn):hover{color:var(--ouro)}
+.menu-btn{display:none;width:44px;height:44px;align-items:center;justify-content:center;background:none;border:1px solid var(--linha);color:var(--marfim);cursor:pointer}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;align-items:center;gap:64px;padding-top:88px;padding-bottom:104px}
+.hero__txt{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:26px}
+.hero h1{font-size:clamp(38px,5.4vw,72px);line-height:1.08;letter-spacing:.01em}
+.lead{max-width:580px;font-size:22px;color:var(--suave)}
+.hero__selo{flex:1 1 320px;display:flex;justify-content:center}
+.hero__selo svg{width:100%;max-width:440px;height:auto}
+.rotulo{font-family:var(--serif-tit);font-size:14px;letter-spacing:.3em;color:var(--ouro)}
+.acoes{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
+.acoes--centro{justify-content:center}
+.fatos{list-style:none;margin:16px 0 0;padding:24px 0 0;border-top:1px solid var(--linha);display:flex;flex-wrap:wrap;gap:10px 32px;font-family:var(--serif-tit);font-size:13px;letter-spacing:.18em;color:var(--suave)}
+
+/* seções */
+.secao{padding:104px 0}
+.secao--funda{background:rgba(15,20,32,.55);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.cabeca{display:flex;flex-direction:column;gap:16px;margin-bottom:56px}
+.cabeca--centro{align-items:center;text-align:center}
+.cabeca--centro h2{max-width:820px}
+.cabeca--split{flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px}
+.cabeca--split>div{flex:1 1 480px;display:flex;flex-direction:column;gap:16px}
+.cabeca--split .sub{flex:1 1 340px;max-width:460px}
+.sub{color:var(--suave);max-width:720px}
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px}
+
+/* cards de consulta */
+.card{position:relative;background:rgba(26,33,51,.9);padding:40px 32px;display:flex;flex-direction:column;gap:18px}
+.grade--consultas{display:flex;flex-wrap:wrap}
+.grade--consultas .card{flex:1 1 320px}
+.card__selo{position:absolute;top:-13px;left:32px;background:var(--ouro);color:var(--bg);font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.14em;padding:4px 12px}
+.card__tag{font-family:var(--sans);font-size:13px;letter-spacing:.14em;color:var(--ouro)}
+.card h3{font-size:26px}
+.card__desc{color:var(--suave);flex:1 1 auto}
+.card__meta{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:18px;border-top:1px solid var(--linha-fina);font-family:var(--sans);font-size:15px;color:var(--suave)}
+.preco{font-family:var(--serif-tit);font-size:24px;color:var(--marfim)}
+
+/* passos */
+.passos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:24px}
+.passos li{border-top:1px solid var(--ouro);padding-top:24px;display:flex;flex-direction:column;gap:10px}
+.passos__n{font-family:var(--serif-tit);font-size:22px;color:var(--ouro)}
+.passos h3{font-size:20px;letter-spacing:.04em}
+.passos p{color:var(--suave);font-size:19px}
+
+/* pilares */
+.pilar{background:rgba(20,26,40,.6);border:1px solid rgba(201,164,92,.3);padding:36px 32px;display:flex;flex-direction:column;gap:14px}
+.pilar h3{font-size:22px;letter-spacing:.08em}
+.pilar p{color:var(--suave)}
+
+/* fundadores */
+.pessoa{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.pessoa__foto{width:100%;aspect-ratio:4/5;background:rgba(26,33,51,.7);border:1px solid rgba(201,164,92,.3);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:14px;color:var(--suave)}
+.pessoa h3{font-size:24px;margin-top:8px}
+.pessoa__funcao{font-family:var(--sans);font-size:14px;letter-spacing:.12em;color:var(--ouro)}
+.pessoa p:last-child{color:var(--suave)}
+
+/* formação */
+.formacao{display:flex;flex-wrap:wrap;gap:56px}
+.formacao__txt{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.modulos{list-style:none;margin:8px 0 0;padding:0}
+.modulos li{display:flex;gap:24px;padding:20px 0;border-top:1px solid var(--linha-fina)}
+.modulos li:last-child{border-bottom:1px solid var(--linha-fina)}
+.modulos span{font-family:var(--serif-tit);font-size:20px;color:var(--ouro);width:40px;flex:0 0 auto}
+.modulos strong{display:block;font-family:var(--serif-tit);font-weight:500;font-size:20px}
+.modulos small{display:block;color:var(--suave);font-size:18px}
+.espera{flex:1 1 340px;align-self:flex-start;background:rgba(26,33,51,.94);border:1px solid var(--ouro);padding:40px 32px;display:flex;flex-direction:column;gap:10px;font-family:var(--sans)}
+.espera h3{font-size:26px;margin-bottom:10px}
+.espera label{font-size:14px;letter-spacing:.06em;color:var(--marfim);margin-top:6px}
+.opcional{color:var(--suave)}
+.espera input{min-height:48px;padding:0 14px;background:var(--bg);border:1px solid rgba(237,230,214,.3);color:var(--marfim);font:inherit;font-size:16px}
+.espera input:focus{border-color:var(--ouro);outline:none}
+.espera input[aria-invalid="true"]{border-color:#E8A07A}
+.espera .btn{margin-top:14px}
+.espera__status{font-size:15px;min-height:1.5em;color:var(--ouro-claro)}
+
+/* faq */
+.faq{max-width:860px}
+.faq details{border-top:1px solid var(--linha-fina)}
+.faq details:last-child{border-bottom:1px solid var(--linha-fina)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-family:var(--serif-tit);font-size:19px;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--sans);font-size:26px;color:var(--ouro);flex:0 0 auto}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 24px;color:var(--suave)}
+
+/* cta final */
+.cta{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:112px 24px}
+.lema{font-style:italic;font-size:24px;color:var(--ouro)}
+
+/* rodapé */
+.rodape{border-top:1px solid var(--linha)}
+.rodape__inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding-top:40px;padding-bottom:40px;font-family:var(--sans);font-size:14px;color:var(--suave)}
+.rodape__marca{font-family:var(--serif-tit);letter-spacing:.16em;color:var(--marfim);display:flex;flex-direction:column;gap:6px}
+.rodape__marca small{font-family:var(--sans);letter-spacing:.04em;font-size:13px;color:var(--suave)}
+.rodape__links{display:flex;gap:22px}
+.rodape__links a{color:var(--suave);text-decoration:none;padding:10px 0}
+.rodape__links a:hover{color:var(--ouro)}
+
+/* whatsapp flutuante */
+.whats-flutuante{position:fixed;right:20px;bottom:20px;z-index:40;width:58px;height:58px;border-radius:50%;background:var(--ouro);color:var(--bg);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.whats-flutuante:hover{background:var(--ouro-claro);color:var(--bg)}
+
+/* fundo cósmico */
+#cosmos{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+
+/* responsivo */
+@media (max-width:980px){
+  .menu-btn{display:inline-flex}
+  .menu{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--bg-funda);border-bottom:1px solid var(--linha);padding:8px 24px 20px}
+  .menu.aberto{display:flex}
+  .menu a:not(.btn){padding:14px 0;border-bottom:1px solid var(--linha-fina)}
+  .menu .btn{margin-top:16px}
+}
+@media (max-width:600px){
+  body{font-size:18px}
+  .marca__nome{font-size:8px;letter-spacing:.12em}
+  .marca__sigla{font-size:19px}
+  .topo__inner .marca svg{width:38px;height:38px}
+  .hero{padding-top:48px;padding-bottom:72px;gap:40px}
+  .hero__selo{order:-1}
+  .hero__selo svg{max-width:220px}
+  .secao{padding:72px 0}
+  .card,.espera,.pilar{padding:32px 22px}
+  .acoes .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="cosmos" aria-hidden="true"></canvas>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topo">
+  <div class="wrap topo__inner">
+    <a href="#inicio" class="marca" aria-label="I.A.S. — início">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="44" height="44" aria-hidden="true">
+<rect x="14" y="14" width="372" height="372" fill="none" stroke="#C9A45C" stroke-width="1.2"/>
+<rect x="25" y="25" width="350" height="350" fill="none" stroke="#C9A45C" stroke-width="7" stroke-dasharray="0.6 28.567"/>
+<rect x="34" y="34" width="332" height="332" fill="none" stroke="#C9A45C" stroke-width="0.8"/>
+<rect x="44" y="44" width="312" height="312" fill="none" stroke="#EDE6D6" stroke-width="2"/>
+<line x1="44" y1="44" x2="356" y2="356" stroke="#EDE6D6" stroke-width="1.3"/>
+<line x1="356" y1="44" x2="44" y2="356" stroke="#EDE6D6" stroke-width="1.3"/>
+<path d="M200 44 L356 200 L200 356 L44 200 Z" fill="none" stroke="#EDE6D6" stroke-width="1.6"/>
+<circle cx="200" cy="200" r="110.3" fill="none" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="200" cy="200" r="78" fill="none" stroke="#C9A45C" stroke-width="0.7" stroke-dasharray="1 3"/>
+<circle cx="200" cy="44" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="356" cy="200" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="200" cy="356" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="44" cy="200" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<path d="M200 106 L202.8 117.2 L214 120 L202.8 122.8 L200 134 L197.2 122.8 L186 120 L197.2 117.2 Z" fill="#C9A45C"/>
+<circle cx="200" cy="200" r="2.6" fill="#C9A45C"/>
+</svg>
+      <span class="marca__txt"><span class="marca__sigla">I·A·S</span><span class="marca__nome">INSTITUTO DE ASTROLOGIA SIDERAL</span></span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav id="menu" class="menu" aria-label="Principal">
+      <a href="#mapas">Consultas</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#instituto">O Instituto</a>
+      <a href="#responsaveis">Responsáveis</a>
+      <a href="#formacao">Formação</a>
+      <a href="#mapas" class="btn btn--ouro btn--sm" data-agendar="Consulta astrológica">Agendar consulta</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<section id="inicio" class="hero wrap">
+  <div class="hero__txt">
+    <p class="rotulo">JYOTIṢA · ASTROLOGIA SIDERAL</p>
+    <h1>A medida do céu, lida com rigor e intuição.</h1>
+    <p class="lead">Consultas de astrologia sideral a partir do cálculo preciso do zodíaco das estrelas e das fontes clássicas do Jyotiṣa. Descubra o que o seu mapa revela sobre caminho, ciclos e escolhas.</p>
+    <div class="acoes">
+      <a href="#mapas" class="btn btn--ouro">CONHECER AS CONSULTAS</a>
+      <a href="#" class="btn btn--linha" data-whats="Olá! Gostaria de saber mais sobre as consultas do I.A.S.">FALAR NO WHATSAPP</a>
+    </div>
+    <ul class="fatos" aria-label="Fundamentos">
+      <li>12 RĀŚIS</li><li>9 GRAHAS</li><li>27 NAKṢATRAS</li><li>108 PADAS</li>
+    </ul>
+  </div>
+  <div class="hero__selo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" class="selo-grande" role="img" aria-label="Selo do Instituto: mapa védico do norte da Índia em moldura quadrada graduada">
+<rect x="14" y="14" width="372" height="372" fill="none" stroke="#C9A45C" stroke-width="1.2"/>
+<rect x="25" y="25" width="350" height="350" fill="none" stroke="#C9A45C" stroke-width="7" stroke-dasharray="0.6 28.567"/>
+<rect x="34" y="34" width="332" height="332" fill="none" stroke="#C9A45C" stroke-width="0.8"/>
+<rect x="44" y="44" width="312" height="312" fill="none" stroke="#EDE6D6" stroke-width="2"/>
+<line x1="44" y1="44" x2="356" y2="356" stroke="#EDE6D6" stroke-width="1.3"/>
+<line x1="356" y1="44" x2="44" y2="356" stroke="#EDE6D6" stroke-width="1.3"/>
+<path d="M200 44 L356 200 L200 356 L44 200 Z" fill="none" stroke="#EDE6D6" stroke-width="1.6"/>
+<circle cx="200" cy="200" r="110.3" fill="none" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="200" cy="200" r="78" fill="none" stroke="#C9A45C" stroke-width="0.7" stroke-dasharray="1 3"/>
+<circle cx="200" cy="44" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="356" cy="200" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="200" cy="356" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<circle cx="44" cy="200" r="3.4" fill="#141A28" stroke="#C9A45C" stroke-width="1.3"/>
+<path d="M200 106 L202.8 117.2 L214 120 L202.8 122.8 L200 134 L197.2 122.8 L186 120 L197.2 117.2 Z" fill="#C9A45C"/>
+<circle cx="200" cy="200" r="2.6" fill="#C9A45C"/>
+</svg>
+  </div>
+</section>
+
+<section id="mapas" class="secao">
+  <div class="wrap">
+    <div class="cabeca cabeca--split">
+      <div>
+        <p class="rotulo">CONSULTAS ASTROLÓGICAS</p>
+        <h2>Escolha a sua leitura</h2>
+      </div>
+      <p class="sub">Cada consulta parte do seu mapa calculado com data, hora e local de nascimento, e é conduzida por um dos responsáveis do Instituto.</p>
+    </div>
+    <div class="grade grade--consultas">
+      <article class="card">
+        <p class="card__tag">JANMA KUṆḌALĪ</p>
+        <h3>Mapa Natal</h3>
+        <p class="card__desc">Leitura completa do mapa: temperamento, vocação, relações e os grandes temas da vida.</p>
+        <a href="#" class="btn btn--ouro btn--bloco" data-agendar="Mapa Natal">AGENDAR</a>
+      </article>
+      <article class="card">
+        <p class="card__tag">DAŚĀ · GOCARA</p>
+        <h3>Previsão Anual</h3>
+        <p class="card__desc">Os períodos planetários e trânsitos em curso, com orientação para o próximo ciclo.</p>
+        <a href="#" class="btn btn--ouro btn--bloco" data-agendar="Previsão Anual">AGENDAR</a>
+      </article>
+      <article class="card">
+        <p class="card__tag">MUHŪRTA</p>
+        <h3>Eleição de Datas</h3>
+        <p class="card__desc">O momento mais favorável para iniciar um negócio, um casamento, uma mudança ou uma viagem.</p>
+        <a href="#" class="btn btn--ouro btn--bloco" data-agendar="Eleição de Datas">AGENDAR</a>
+      </article>
+      <article class="card">
+        <p class="card__tag">KŪṬA · VIVĀHA</p>
+        <h3>Sinastria de Casamento</h3>
+        <p class="card__desc">A compatibilidade entre os mapas do casal: afinidades, desafios e o momento mais favorável para a união.</p>
+        <a href="#" class="btn btn--ouro btn--bloco" data-agendar="Sinastria de Casamento">AGENDAR</a>
+      </article>
+      <article class="card">
+        <p class="card__tag">SINASTRIA · PARCERIAS</p>
+        <h3>Sinastria Profissional</h3>
+        <p class="card__desc">A compatibilidade entre sócios e parceiros de negócio: papéis, complementaridade e pontos de atenção.</p>
+        <a href="#" class="btn btn--ouro btn--bloco" data-agendar="Sinastria Profissional">AGENDAR</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" class="secao secao--funda">
+  <div class="wrap">
+    <div class="cabeca cabeca--centro">
+      <p class="rotulo">COMO FUNCIONA</p>
+      <h2>Do agendamento à leitura</h2>
+    </div>
+    <ol class="passos">
+      <li><span class="passos__n">I</span><h3>Escolha a consulta</h3><p>Selecione a leitura e fale com o Instituto para reservar o horário.</p></li>
+      <li><span class="passos__n">II</span><h3>Envie seus dados</h3><p>Data, hora exata e cidade de nascimento. A hora define o ascendente (lagna).</p></li>
+      <li><span class="passos__n">III</span><h3>Cálculo do mapa</h3><p>O astrólogo prepara o mapa sideral e as divisões necessárias para a sua pergunta.</p></li>
+      <li><span class="passos__n">IV</span><h3>A sessão</h3><p>Uma conversa em que o mapa é lido e interpretado para o seu momento.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="instituto" class="secao">
+  <div class="wrap">
+    <div class="cabeca cabeca--centro">
+      <p class="rotulo">O INSTITUTO</p>
+      <h2>Uma escola de astrologia com autoridade escritural</h2>
+      <p class="sub">O I.A.S. reúne prática de consultório, ensino estruturado e pesquisa em torno da astrologia sideral, com o compromisso de unir exatidão técnica e leitura sensível.</p>
+    </div>
+    <div class="grade">
+      <div class="pilar">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A45C" stroke-width="1.3" aria-hidden="true"><circle cx="20" cy="20" r="17"/><line x1="20" y1="3" x2="20" y2="37"/><line x1="3" y1="20" x2="37" y2="20"/><circle cx="20" cy="20" r="2" fill="#C9A45C"/></svg>
+        <h3>Precisão</h3>
+        <p>Cálculo pelo zodíaco sideral, com o ayanāṁśa aplicado a cada mapa, das posições planetárias às divisões harmônicas.</p>
+      </div>
+      <div class="pilar">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A45C" stroke-width="1.3" aria-hidden="true"><path d="M6 8h11a3 3 0 0 1 3 3v23a3 3 0 0 0-3-3H6z"/><path d="M34 8H23a3 3 0 0 0-3 3v23a3 3 0 0 1 3-3h11z"/></svg>
+        <h3>Tradição</h3>
+        <p>Fundamentação nos textos clássicos do Jyotiṣa, como o Bṛhat Parāśara Horā Śāstra, lidos em contexto e com fidelidade.</p>
+      </div>
+      <div class="pilar">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C9A45C" stroke-width="1.3" aria-hidden="true"><path d="M20 5l3.5 11.5L35 20l-11.5 3.5L20 35l-3.5-11.5L5 20l11.5-3.5z"/></svg>
+        <h3>Intuição</h3>
+        <p>Uma leitura que vai além da técnica: o mapa como linguagem para compreender ciclos, escolhas e propósito.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="responsaveis" class="secao secao--funda">
+  <div class="wrap">
+    <div class="cabeca cabeca--centro">
+      <p class="rotulo">RESPONSÁVEIS</p>
+      <h2>Quem conduz o Instituto</h2>
+    </div>
+    <div class="grade">
+      <article class="pessoa">
+        <div class="pessoa__foto" role="img" aria-label="Foto de Luiz Nascimento">[FOTO]</div>
+        <h3>Luiz Nascimento</h3>
+        <p class="pessoa__funcao">[FUNÇÃO NO INSTITUTO]</p>
+        <p>[Bio breve: formação, linhagem de estudo e anos de prática.]</p>
+      </article>
+      <article class="pessoa">
+        <div class="pessoa__foto" role="img" aria-label="Foto de Krishna Katamrta">[FOTO]</div>
+        <h3>Krishna Katamrta</h3>
+        <p class="pessoa__funcao">[FUNÇÃO NO INSTITUTO]</p>
+        <p>[Bio breve: formação, linhagem de estudo e anos de prática.]</p>
+      </article>
+      <article class="pessoa">
+        <div class="pessoa__foto" role="img" aria-label="Foto de Krishna Parampara Das">[FOTO]</div>
+        <h3>Krishna Parampara Das</h3>
+        <p class="pessoa__funcao">[FUNÇÃO NO INSTITUTO]</p>
+        <p>Flávio Furtado. [Bio breve: formação, linhagem de estudo e anos de prática.]</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="formacao" class="secao">
+  <div class="wrap formacao">
+    <div class="formacao__txt">
+      <p class="rotulo">FORMAÇÃO · EM BREVE</p>
+      <h2>Formação em Astrologia Sideral</h2>
+      <p class="sub">Do zodíaco sideral à leitura preditiva, em quatro módulos progressivos. Entre na lista de espera para ser avisado primeiro quando as inscrições abrirem.</p>
+      <ol class="modulos">
+        <li><span>I</span><div><strong>Fundamentos</strong><small>Zodíaco sideral, ayanāṁśa e os doze rāśis.</small></div></li>
+        <li><span>II</span><div><strong>Os Grahas</strong><small>Os nove planetas, dignidades, regências e aspectos.</small></div></li>
+        <li><span>III</span><div><strong>Casas e Nakṣatras</strong><small>As doze bhāvas, os 27 nakṣatras e a leitura do mapa.</small></div></li>
+        <li><span>IV</span><div><strong>Previsão</strong><small>Vimśottarī daśā, trânsitos e o navāṁśa (D-9).</small></div></li>
+      </ol>
+    </div>
+    <form class="espera" id="lista-espera" novalidate>
+      <p class="card__tag">LISTA DE ESPERA</p>
+      <h3>Quero ser avisado</h3>
+      <label for="f-nome">Nome</label>
+      <input id="f-nome" name="nome" type="text" autocomplete="name" required>
+      <label for="f-email">E-mail</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" required>
+      <label for="f-whats">WhatsApp <span class="opcional">(opcional)</span></label>
+      <input id="f-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel">
+      <button type="submit" class="btn btn--ouro btn--bloco">ENTRAR NA LISTA</button>
+      <p class="espera__status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section id="perguntas" class="secao secao--funda">
+  <div class="wrap faq">
+    <div class="cabeca cabeca--centro">
+      <p class="rotulo">PERGUNTAS FREQUENTES</p>
+      <h2>Antes de agendar</h2>
+    </div>
+    <details>
+      <summary>Qual a diferença entre astrologia sideral e tropical?</summary>
+      <p>A astrologia tropical mede os signos a partir do equinócio; a sideral, a partir das estrelas fixas. Hoje a diferença entre os dois zodíacos (o ayanāṁśa) passa de 24°, por isso muitas pessoas descobrem que seu Sol, sua Lua e seu ascendente caem em signos diferentes no mapa sideral.</p>
+    </details>
+    <details>
+      <summary>Preciso saber a minha hora de nascimento?</summary>
+      <p>Sim, quanto mais exata, melhor: a hora define o ascendente e as casas do mapa. Se você não tiver a hora, fale com o Instituto antes de agendar.</p>
+    </details>
+    <details>
+      <summary>As consultas são on-line?</summary>
+      <p>[Responder: formato das sessões (videochamada, presencial em [CIDADE]) e se há gravação.]</p>
+    </details>
+    <details>
+      <summary>Quais as formas de pagamento?</summary>
+      <p>[Responder: Pix, cartão, parcelamento.]</p>
+    </details>
+  </div>
+</section>
+
+<section id="contato" class="secao cta wrap">
+  <p class="lema">Mensura Caeli</p>
+  <h2>Comece pelo seu mapa</h2>
+  <p class="sub">Agende sua consulta ou tire suas dúvidas diretamente com o Instituto.</p>
+  <div class="acoes acoes--centro">
+    <a href="#" class="btn btn--ouro" data-whats="Olá! Quero agendar uma consulta com o I.A.S.">FALAR NO WHATSAPP</a>
+    <a href="#" class="btn btn--linha" data-email>ENVIAR E-MAIL</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <div class="wrap rodape__inner">
+    <span class="rodape__marca">I·A·S — INSTITUTO DE ASTROLOGIA SIDERAL<small>Luiz Nascimento · Krishna Katamrta · Krishna Parampara Das</small></span>
+    <span class="rodape__links"><a href="#" data-email>E-mail</a><a href="#" data-insta>Instagram</a><a href="#" data-whats="Olá!">WhatsApp</a></span>
+    <span>© <span id="ano">2026</span> I.A.S.</span>
+  </div>
+</footer>
+
+<a href="#" class="whats-flutuante" data-whats="Olá! Vim pelo site do I.A.S." aria-label="Falar no WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 9.2c.2 2.6 2.2 4.7 4.8 5.1l1.1-1.2 1.9.9-.4 1.6c-3.9.3-7.6-3.3-7.4-7.3l1.6-.4.9 1.9z"/></svg>
+</a>
+
+<script>
+/*
+ * CONFIGURAÇÃO DO SITE — edite só este arquivo para ligar os contatos.
+ */
+window.IAS_CONFIG = {
+  // WhatsApp do Instituto: só números, com DDI e DDD. Ex.: "5591999998888"
+  whatsapp: "",
+
+  // Link de agendamento on-line (Cal.com, Calendly...). Se vazio, os botões
+  // "Agendar" abrem o WhatsApp com a mensagem já preenchida.
+  bookingUrl: "",
+
+  // Endereço que recebe o formulário da lista de espera do curso
+  // (Formspree, webhook do n8n etc.). Se vazio, o formulário envia pelo WhatsApp.
+  waitlistEndpoint: "",
+
+  email: "contato@seudominio.com.br",
+  instagram: "" // só o usuário, sem @
+};
+
+(function () {
+  var C = window.IAS_CONFIG || {};
+
+  function whatsUrl(msg) {
+    var base = C.whatsapp ? 'https://wa.me/' + C.whatsapp : 'https://wa.me/';
+    return base + '?text=' + encodeURIComponent(msg);
+  }
+
+  // Links de WhatsApp com mensagem pronta
+  document.querySelectorAll('[data-whats]').forEach(function (a) {
+    a.href = whatsUrl(a.getAttribute('data-whats'));
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  // Botões "Agendar": link de agendamento, ou WhatsApp com o nome da consulta
+  document.querySelectorAll('[data-agendar]').forEach(function (a) {
+    var tipo = a.getAttribute('data-agendar');
+    a.href = C.bookingUrl || whatsUrl('Olá! Quero agendar: ' + tipo + '.');
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  document.querySelectorAll('[data-email]').forEach(function (a) {
+    a.href = 'mailto:' + (C.email || '');
+  });
+
+  document.querySelectorAll('[data-insta]').forEach(function (a) {
+    if (C.instagram) {
+      a.href = 'https://instagram.com/' + C.instagram;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    } else {
+      a.remove();
+    }
+  });
+
+  var ano = document.getElementById('ano');
+  if (ano) ano.textContent = new Date().getFullYear();
+
+  // Menu no celular
+  var btn = document.querySelector('.menu-btn');
+  var menu = document.getElementById('menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function () {
+      var aberto = menu.classList.toggle('aberto');
+      btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      btn.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        menu.classList.remove('aberto');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Abrir menu');
+      });
+    });
+  }
+
+  // Lista de espera do curso
+  var form = document.getElementById('lista-espera');
+  if (form) {
+    var status = form.querySelector('.espera__status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nome = form.nome, email = form.email;
+      var ok = true;
+      [nome, email].forEach(function (el) {
+        var valido = el.value.trim() !== '' && el.checkValidity();
+        el.setAttribute('aria-invalid', valido ? 'false' : 'true');
+        if (!valido) ok = false;
+      });
+      if (!ok) {
+        status.textContent = 'Preencha nome e um e-mail válido.';
+        return;
+      }
+      var dados = {
+        nome: nome.value.trim(),
+        email: email.value.trim(),
+        whatsapp: form.whatsapp.value.trim(),
+        origem: 'site-ias-lista-espera'
+      };
+
+      if (!C.waitlistEndpoint) {
+        window.open(whatsUrl('Olá! Quero entrar na lista de espera da Formação em Astrologia Sideral.\nNome: ' + dados.nome + '\nE-mail: ' + dados.email), '_blank', 'noopener');
+        status.textContent = 'Abrimos o WhatsApp para você confirmar sua inscrição.';
+        return;
+      }
+
+      status.textContent = 'Enviando…';
+      fetch(C.waitlistEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(dados)
+      }).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        form.reset();
+        status.textContent = 'Pronto! Você será avisado quando as inscrições abrirem.';
+      }).catch(function () {
+        status.textContent = 'Não foi possível enviar agora. Tente de novo ou fale conosco pelo WhatsApp.';
+      });
+    });
+  }
+})();
+
+/* Fundo cósmico-matemático em 3D.
+   Um corpo de partículas que se transforma conforme a rolagem da página:
+   roda zodiacal (12 · 27 · 108) → esfera armilar (equador, eclíptica, meridianos)
+   → galáxia em filotaxia (ângulo áureo) → o mapa védico do selo.
+   Atrás, estrelas ligadas em constelações que reagem ao cursor. */
+(function () {
+  var c = document.getElementById('cosmos');
+  if (!c || !c.getContext) return;
+  var g = c.getContext('2d');
+  var reduz = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TAU = Math.PI * 2, OURO = '201,164,92', MARFIM = '237,230,214';
+  var N = innerWidth < 700 ? 700 : 1300;
+  var W, H, estrelas = [], mx = 0, my = 0, alvoX = 0, alvoY = 0, cursor = null, rodando = true;
+  var prog = 0, giro = 0, ultimo = 0;
+
+  // ---------- formas (modelo no plano x-z, eixo de giro = y) ----------
+  function circ(r, y) { return function (u) { var a = u * TAU; return [Math.cos(a) * r, y || 0, Math.sin(a) * r]; }; }
+  function raios(n, r1, r2, fase) {
+    return function (u) {
+      var k = Math.floor(u * n), s = u * n - k, a = (fase || 0) + k * TAU / n, r = r1 + (r2 - r1) * s;
+      return [Math.cos(a) * r, 0, Math.sin(a) * r];
+    };
+  }
+  function seg(ax, az, bx, bz) { return function (u) { return [ax + (bx - ax) * u, 0, az + (bz - az) * u]; }; }
+  function inclinado(r, inc) {
+    return function (u) {
+      var a = u * TAU, x = Math.cos(a) * r, z = Math.sin(a) * r;
+      return [x, -z * Math.sin(inc), z * Math.cos(inc)];
+    };
+  }
+  function meridiano(lon) {
+    return function (u) {
+      var a = u * TAU, r = Math.cos(a), y = Math.sin(a);
+      return [r * Math.cos(lon), y, r * Math.sin(lon)];
+    };
+  }
+  function montar(partes) {
+    var tot = 0, out = [];
+    partes.forEach(function (p) { tot += p[0]; });
+    var acum = 0, idx = 0;
+    for (var i = 0; i < N; i++) {
+      var f = (i + .5) / N * tot;
+      while (idx < partes.length - 1 && f > acum + partes[idx][0]) { acum += partes[idx][0]; idx++; }
+      var u = (f - acum) / partes[idx][0];
+      out.push(partes[idx][1](u, i));
+    }
+    return out;
+  }
+  var EPS = 23.44 * Math.PI / 180;
+  var roda = montar([
+    [.17, circ(1)], [.14, circ(.955)], [.13, circ(.9)], [.08, circ(.5)],
+    [.2, raios(12, .5, 1, TAU / 24)], [.1, raios(27, .9, .955)], [.18, raios(108, .955, .985)]
+  ]);
+  var esfera = montar([
+    [.16, circ(1)],
+    [.16, inclinado(1, EPS)],
+    [.1, circ(Math.cos(EPS), Math.sin(EPS))], [.1, circ(Math.cos(EPS), -Math.sin(EPS))],
+    [.1, meridiano(0)], [.1, meridiano(Math.PI / 4)], [.1, meridiano(Math.PI / 2)], [.1, meridiano(3 * Math.PI / 4)],
+    [.08, function (u) { return [0, -1.25 + 2.5 * u, 0]; }]
+  ]);
+  var AUREO = Math.PI * (3 - Math.sqrt(5));
+  var galaxia = montar([[1, function (u, i) {
+    var r = Math.sqrt(u) * 1.15, a = i * AUREO;
+    return [Math.cos(a) * r, Math.sin(i * 1.7) * .1 * (1.15 - r), Math.sin(a) * r];
+  }]]);
+  var q = .72, rc = q / Math.SQRT2;
+  var selo = montar([
+    [.09, seg(-.84, -.84, .84, -.84)], [.09, seg(.84, -.84, .84, .84)], [.09, seg(.84, .84, -.84, .84)], [.09, seg(-.84, .84, -.84, -.84)],
+    [.06, seg(-q, -q, q, -q)], [.06, seg(q, -q, q, q)], [.06, seg(q, q, -q, q)], [.06, seg(-q, q, -q, -q)],
+    [.07, seg(-q, -q, q, q)], [.07, seg(q, -q, -q, q)],
+    [.05, seg(0, -q, q, 0)], [.05, seg(q, 0, 0, q)], [.05, seg(0, q, -q, 0)], [.05, seg(-q, 0, 0, -q)],
+    [.1, circ(rc)]
+  ]);
+  var formas = [roda, esfera, galaxia, selo];
+  //            inclinação           escala  centro-x (desktop)
+  var chaves = [[Math.PI / 2, 1.0, .74], [Math.PI / 2 - .5, .82, .5], [1.0, 1.05, .5], [Math.PI / 2, .62, .5]];
+  var atraso = []; for (var i = 0; i < N; i++) atraso.push(Math.random());
+
+  function suave(x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function medir() {
+    var d = Math.min(window.devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    c.width = W * d; c.height = H * d;
+    g.setTransform(d, 0, 0, d, 0, 0);
+    var n = Math.min(150, Math.round(W * H / 9500));
+    estrelas = [];
+    for (var i = 0; i < n; i++) {
+      estrelas.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.1 + .3,
+        f: Math.random() * TAU, v: .5 + Math.random() * 1.5, z: .25 + Math.random() * .75 });
+    }
+  }
+
+  function rolagem() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    return max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+  }
+
+  function desenhar(t) {
+    var dt = Math.min(50, t - (ultimo || t)); ultimo = t;
+    mx += (alvoX - mx) * .05; my += (alvoY - my) * .05;
+    prog += (rolagem() - prog) * (reduz ? 1 : .06);
+    g.clearRect(0, 0, W, H);
+
+    // ---- estrelas e constelações ----
+    var ox = -mx * 26, oy = -my * 26 - prog * 60, pts = [];
+    for (var i = 0; i < estrelas.length; i++) {
+      var e = estrelas[i];
+      var x = e.x + ox * e.z, y = ((e.y + oy * e.z) % H + H) % H;
+      pts.push(x, y);
+      var b = .35 + .35 * Math.sin(t * .001 * e.v + e.f);
+      g.fillStyle = 'rgba(' + MARFIM + ',' + b.toFixed(3) + ')';
+      g.beginPath(); g.arc(x, y, e.r, 0, TAU); g.fill();
+    }
+    g.lineWidth = .6;
+    for (var a = 0; a < pts.length; a += 2) {
+      for (var bb = a + 2; bb < pts.length; bb += 2) {
+        var dx = pts[a] - pts[bb], dy = pts[a + 1] - pts[bb + 1], d2 = dx * dx + dy * dy;
+        if (d2 < 10000) {
+          g.strokeStyle = 'rgba(' + OURO + ',' + ((1 - d2 / 10000) * .13).toFixed(3) + ')';
+          g.beginPath(); g.moveTo(pts[a], pts[a + 1]); g.lineTo(pts[bb], pts[bb + 1]); g.stroke();
+        }
+      }
+      if (cursor) {
+        var cx2 = pts[a] - cursor.x, cy2 = pts[a + 1] - cursor.y, dc = cx2 * cx2 + cy2 * cy2;
+        if (dc < 26000) {
+          g.strokeStyle = 'rgba(' + OURO + ',' + ((1 - dc / 26000) * .35).toFixed(3) + ')';
+          g.beginPath(); g.moveTo(pts[a], pts[a + 1]); g.lineTo(cursor.x, cursor.y); g.stroke();
+        }
+      }
+    }
+
+    // ---- corpo 3D que se transforma com a rolagem ----
+    var s = prog * (formas.length - 1), k = Math.min(formas.length - 2, Math.floor(s)), f = s - k;
+    var A = formas[k], B = formas[k + 1], ca = chaves[k], cb = chaves[k + 1], fs = suave(f);
+    var incl = lerp(ca[0], cb[0], fs) + my * .35;
+    var esc = lerp(ca[1], cb[1], fs);
+    var largo = W > 900;
+    var cx = W * (largo ? lerp(ca[2], cb[2], fs) : .5) - mx * 20, cy = H * .5 - my * 20;
+    var R = Math.min(W, H) * (largo ? .42 : .4) * esc;
+
+    // giro: contínuo, desacelera e se alinha ao chegar no selo
+    var vel = .00012 * (1 - suave((prog - .8) / .2));
+    giro += dt * vel;
+    var perto = suave((prog - .78) / .22);
+    var alinhado = Math.round(giro / (Math.PI / 2)) * (Math.PI / 2);
+    var ry = lerp(giro, alinhado, perto) + mx * .5;
+    var cY = Math.cos(ry), sY = Math.sin(ry), cX = Math.cos(incl), sX = Math.sin(incl);
+    var CAM = 3.4;
+
+    for (var p = 0; p < N; p++) {
+      var fp = suave(f * 1.5 - atraso[p] * .5);
+      var pa = A[p], pb = B[p];
+      var X = lerp(pa[0], pb[0], fp), Y = lerp(pa[1], pb[1], fp), Z = lerp(pa[2], pb[2], fp);
+      // giro em y
+      var x1 = X * cY + Z * sY, z1 = -X * sY + Z * cY;
+      // inclinação em x
+      var y2 = Y * cX - z1 * sX, z2 = Y * sX + z1 * cX;
+      var per = CAM / (CAM + z2);
+      var px = cx + x1 * R * per, py = cy + y2 * R * per;
+      var prof = (1 - z2) * .5;
+      var alfa = .2 + .6 * prof;
+      g.fillStyle = 'rgba(' + (p % 9 === 0 ? MARFIM : OURO) + ',' + alfa.toFixed(3) + ')';
+      var tam = 1.9 * per;
+      g.fillRect(px - tam / 2, py - tam / 2, tam, tam);
+    }
+
+    if (!reduz && rodando) requestAnimationFrame(desenhar);
+  }
+
+  addEventListener('resize', function () { medir(); if (reduz) desenhar(0); });
+  addEventListener('scroll', function () { if (reduz) desenhar(0); }, { passive: true });
+  addEventListener('pointermove', function (ev) {
+    alvoX = ev.clientX / W - .5; alvoY = ev.clientY / H - .5;
+    cursor = ev.pointerType === 'mouse' ? { x: ev.clientX, y: ev.clientY } : null;
+  });
+  document.addEventListener('mouseleave', function () { cursor = null; });
+  document.addEventListener('visibilitychange', function () {
+    rodando = !document.hidden;
+    if (rodando && !reduz) { ultimo = 0; requestAnimationFrame(desenhar); }
+  });
+  medir();
+  prog = rolagem();
+  if (reduz) desenhar(0); else requestAnimationFrame(desenhar);
+})();
+</script>
+</body>
+</html>
