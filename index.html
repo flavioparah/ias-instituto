@@ -121,7 +121,8 @@ button.btn{cursor:pointer}
 
 /* fundadores */
 .pessoa{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
-.pessoa__foto{width:100%;aspect-ratio:4/5;background:rgba(26,33,51,.7);border:1px solid rgba(201,164,92,.3);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:14px;color:var(--suave)}
+.pessoa__foto{width:100%;aspect-ratio:4/5;background:rgba(26,33,51,.7);border:1px solid rgba(201,164,92,.3);overflow:hidden}
+.pessoa__foto img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:saturate(.9)}
 .pessoa h3{font-size:24px;margin-top:8px}
 .pessoa__funcao{font-family:var(--sans);font-size:14px;letter-spacing:.12em;color:var(--ouro)}
 .pessoa p:last-child{color:var(--suave)}
@@ -401,19 +402,19 @@ button.btn{cursor:pointer}
     </div>
     <div class="grade">
       <article class="pessoa">
-        <div class="pessoa__foto" role="img" aria-label="Foto de Luiz Nascimento">[FOTO]</div>
-        <h3>Luiz Nascimento</h3>
+        <div class="pessoa__foto"><img src="https://raw.githubusercontent.com/flavioparah/ias-instituto/main/luis.jpeg" alt="Foto de Luis Nascimento" loading="lazy" onerror="this.remove()"></div>
+        <h3>Luis Nascimento</h3>
         <p class="pessoa__funcao">[FUNÇÃO NO INSTITUTO]</p>
         <p>[Bio breve: formação, linhagem de estudo e anos de prática.]</p>
       </article>
       <article class="pessoa">
-        <div class="pessoa__foto" role="img" aria-label="Foto de Krishna Katamrta">[FOTO]</div>
+        <div class="pessoa__foto"><img src="https://raw.githubusercontent.com/flavioparah/ias-instituto/main/katha.jpeg" alt="Foto de Krishna Katamrta" loading="lazy" onerror="this.remove()"></div>
         <h3>Krishna Katamrta</h3>
         <p class="pessoa__funcao">[FUNÇÃO NO INSTITUTO]</p>
         <p>[Bio breve: formação, linhagem de estudo e anos de prática.]</p>
       </article>
       <article class="pessoa">
-        <div class="pessoa__foto" role="img" aria-label="Foto de Krishna Parampara Das">[FOTO]</div>
+        <div class="pessoa__foto"><img src="https://raw.githubusercontent.com/flavioparah/ias-instituto/main/flavio.jpeg" alt="Foto de Krishna Parampara Das" loading="lazy" onerror="this.remove()"></div>
         <h3>Krishna Parampara Das</h3>
         <p class="pessoa__funcao">[FUNÇÃO NO INSTITUTO]</p>
         <p>Flávio Furtado. [Bio breve: formação, linhagem de estudo e anos de prática.]</p>
@@ -493,7 +494,7 @@ button.btn{cursor:pointer}
 
 <footer class="rodape">
   <div class="wrap rodape__inner">
-    <span class="rodape__marca">I·A·S — INSTITUTO DE ASTROLOGIA SIDERAL<small>Luiz Nascimento · Krishna Katamrta · Krishna Parampara Das</small></span>
+    <span class="rodape__marca">I·A·S — INSTITUTO DE ASTROLOGIA SIDERAL<small>Luis Nascimento · Krishna Katamrta · Krishna Parampara Das</small></span>
     <span class="rodape__links"><a href="#" data-email>E-mail</a><a href="#" data-insta>Instagram</a><a href="#" data-whats="Olá!">WhatsApp</a></span>
     <span>© <span id="ano">2026</span> I.A.S.</span>
   </div>
